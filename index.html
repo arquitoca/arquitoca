@@ -7,21 +7,23 @@
 <br><br><canvas id="Canvas1" width="500" height="70" style="border:1px solid"></canvas>
 <br><input type="button" value="REGENERA" onclick="regenera();desenha()">
 <input type="button" value="REINICIA" onclick="reinicia()">
+<a href="https://docs.google.com/forms/d/1CChiFzqZh6EvEq8wVMoUiEf_NAB3TV3N-ThXAYQwjLM/viewform?edit_requested=true"><input type="button" value="FORMULÁRIO"></a>
 <br>
 <div style="font-family:calibri;font-size:15px; color:black">
 O sistema funciona da seguinte forma:
 <br>1- Escolha a combinação clicando em um dos botões Aleatorio.
 <br>2- Dê uma nota de 0 a 10 para a combinação.
-<br>3- Clique uma vez em 'GRAVA PADRÃO'. Aparecerá a confirmação da gravacão. Repita os passos (do 1 ao 3) 3 vezes. Apos clique em MOSTRA PADRÃO.
-<br>4- Escolha NOVA COR deslizando os sliders e visualize o resultado do contraste em tempo real.
+<br>3- Clique uma vez em 'GRAVA PADRÃO'. Aparecerá a confirmação da gravacão.
+<br>Repita os passos (do 1 ao 3) 3 vezes. Apos clique em MOSTRA PADRÃO.
+<br>4- Escolha NOVA COR deslizando os sliders e visualize o resultado do contraste.
 <br>5- Alterne o metodo do contraste para visualizar diferentes resultados.
 </div>
 <img id="b" src="b.png" width="2" height="2">
 <img id="a" src="a.png" width="2" height="2">
 <img id="c" src="c.png" width="2" height="2">
 </td><td>
-<input type="button" value="Aleatorio 1" onclick="GeraCorAleatoria();desenha()">
-<input type="button" value="Aleatorio 2" onclick="GeraCorAleatoria1();desenha()">
+<input type="button" value="ALEATORIO LIVRE" onclick="GeraCorAleatoria();desenha()">
+<input type="button" value="ALEATORIO COND." onclick="GeraCorAleatoria1();desenha()">
 <div style="border:1px solid" >
 1- COR
 <hr>
@@ -34,7 +36,7 @@ O sistema funciona da seguinte forma:
 </div>
 <br>
 <div style="border:1px solid">
-4- TREINAMENTO<div id="aviso" style="background-color:green; color:white"></div>
+3- TREINAMENTO<div id="aviso" style="background-color:green; color:white"></div>
 <hr><input type="button" value="GRAVA PADRÃO" onclick="gravaPadrao(); addArray(); Aviso(); Aviso1()">
 <input type="button" value="MOSTRA PADRÃO" onclick="mostraArray()">
 <div id="Result" style="font-size:10px"></div>
@@ -63,8 +65,8 @@ aFORM_B:<input type="text" size="2" style="border:0px;font-family:calibri;font-s
 </div>
 
 </td><td>
-<div style="border:1px solid">
-<br>2- CONTRASTE
+<br><div style="border:1px solid">
+1- CONTRASTE
 <hr><input type="range" size="2" name="vermelhoRangeA" id="vermelhoRangeA" min="0" max="255" value="00" oninput="this.form.vermelhoInputA.value=this.value; desenha()" />R
 <input type="text" size="2" name="vermelhoInputA" id="vermelhoInputA" min="0" max="255" value="00" oninput="this.form.vermelhoRangeA.value=this.value; desenha()" />Cor vermelho
 <br><input type="range" size="2" name="verdeRangeA" id="verdeRangeA" min="0" max="255" value="00" oninput="this.form.verdeInputA.value=this.value; desenha()" />G
@@ -76,7 +78,7 @@ aFORM_B:<input type="text" size="2" style="border:0px;font-family:calibri;font-s
 <br>
 
 <div id="MudaEstilo" style="border:1px solid red">
-5- NOVA COR
+4- NOVA COR
 <hr><input type="range" size="2" name="NovovermelhoRange" min="0" max="255" value="100" oninput="this.form.NovovermelhoInput.value=this.value; NovaCor()" />R
 <input type="text" size="2" name="NovovermelhoInput" min="0" max="255" value="100" oninput="this.form.NovovermelhoRange.value=this.value; NovaCor()" />Cor vermelho
 <br><input type="range" size="2" name="NovoverdeRange" min="0" max="255" value="100" oninput="this.form.NovoverdeInput.value=this.value; NovaCor()" />G
@@ -86,14 +88,14 @@ aFORM_B:<input type="text" size="2" style="border:0px;font-family:calibri;font-s
 </div>
 
 </td><td>
-<div style="border:1px solid">
-<br>3- NOTA (DE 0 A 10)
+<br><div style="border:1px solid">
+2- NOTA (DE 0 A 10)
 <hr><br><input type="text" size="2" name="Nota" value="5" id="Nota" min="0" max="10">
 <br><br>
 </div>
 <br><br>
 <div style="border:1px solid">
-6- ESCOLHA DO METODO
+5- ESCOLHA DO METODO
 <hr><input type="radio" name="RLMetodo" checked id="RLMetodo" onclick="NovaCor()"> REGRESSãO LINEAR
 <br><input type="radio" name="RLMetodo" id="NaoRLMetodo" onclick="NovaCor()"> METODO ALTER :)
 
