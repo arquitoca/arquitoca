@@ -3,19 +3,23 @@
 <table cellpadding="7">
 <tfoot valign="top">
 <tr><td>
+Desenhado pela equipe ModeLAB: Júlio, Laline, Olavo
 <br><canvas id="Canvas" width="500" height="250" style="border:1px solid"></canvas>
 <br><br><canvas id="Canvas1" width="500" height="70" style="border:1px solid"></canvas>
-<br><input type="button" value="REGENERA" onclick="regenera();desenha()">
+<br><br><input type="button" value="REGENERA" onclick="regenera();desenha()">
 <input type="button" value="REINICIA" onclick="reinicia()">
-<a href="https://docs.google.com/forms/d/1CChiFzqZh6EvEq8wVMoUiEf_NAB3TV3N-ThXAYQwjLM/viewform?edit_requested=true"><input type="button" value="FORMULÁRIO"></a>
-<br>
+<a href="https://docs.google.com/forms/d/1CChiFzqZh6EvEq8wVMoUiEf_NAB3TV3N-ThXAYQwjLM/viewform?edit_requested=true" target="_blank"><input type="button" value="FORMULÁRIO"></a>
+<br><br>
+<div style="font-family:calibri;font-size:18px; color:black">
+INSTRUÇÕES
+</div>
 <div style="font-family:calibri;font-size:15px; color:black">
-O sistema funciona da seguinte forma:
-<br>1- Escolha a combinação clicando em um dos botões Aleatorio.
-<br>2- Dê uma nota de 0 a 10 para a combinação.
+1- Escolha uma combinação clicando quantas vezes quiser
+<br>em um dos botões ALEATORIO.
+<br>2- Dê uma nota de 0 a 10 para a combinação de cores.
 <br>3- Clique uma vez em 'GRAVA PADRÃO'. Aparecerá a confirmação da gravacão.
 <br>Repita os passos (do 1 ao 3) 3 vezes. Apos clique em MOSTRA PADRÃO.
-<br>4- Escolha NOVA COR deslizando os sliders e visualize o resultado do contraste.
+<br>4- Escolha NOVA COR deslizando os sliders e veja resultado em tempo real.
 <br>5- Alterne o metodo do contraste para visualizar diferentes resultados.
 </div>
 <img id="b" src="b.png" width="2" height="2">
@@ -96,8 +100,8 @@ aFORM_B:<input type="text" size="2" style="border:0px;font-family:calibri;font-s
 <br><br>
 <div style="border:1px solid">
 5- ESCOLHA DO METODO
-<hr><input type="radio" name="RLMetodo" checked id="RLMetodo" onclick="NovaCor()"> REGRESSãO LINEAR
-<br><input type="radio" name="RLMetodo" id="NaoRLMetodo" onclick="NovaCor()"> METODO ALTER :)
+<hr><input type="radio" name="RLMetodo" checked id="RLMetodo" onclick="NovaCor()"> METODO 1
+<br><input type="radio" name="RLMetodo" id="NaoRLMetodo" onclick="NovaCor()"> METODO 2
 
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="escolha" checked id="ContrEscuro" onclick="NovaCor()"> Contr. escuro
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="escolha" id="ContrClaro" onclick="NovaCor()"> Contr. claro
