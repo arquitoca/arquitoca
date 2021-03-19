@@ -3,10 +3,19 @@
 <table cellpadding="7">
 <tfoot valign="top">
 <tr><td>
-<canvas id="Canvas" width="500" height="250" style="border:1px solid"></canvas>
+<br><canvas id="Canvas" width="500" height="250" style="border:1px solid"></canvas>
 <br><br><canvas id="Canvas1" width="500" height="70" style="border:1px solid"></canvas>
 <br><input type="button" value="REGENERA" onclick="regenera();desenha()">
 <input type="button" value="REINICIA" onclick="reinicia()">
+<br>
+<div style="font-family:calibri;font-size:15px; color:black">
+O sistema funciona da seguinte forma:
+<br>1- Escolha a combinação clicando em um dos botões Aleatorio.
+<br>2- Dê uma nota de 0 a 10 para a combinação.
+<br>3- Clique uma vez em 'GRAVA PADRÃO'. Aparecerá a confirmação da gravacão. Repita os passos (do 1 ao 3) 3 vezes. Apos clique em MOSTRA PADRÃO.
+<br>4- Escolha NOVA COR deslizando os sliders e visualize o resultado do contraste em tempo real.
+<br>5- Alterne o metodo do contraste para visualizar diferentes resultados.
+</div>
 <img id="b" src="b.png" width="2" height="2">
 <img id="a" src="a.png" width="2" height="2">
 <img id="c" src="c.png" width="2" height="2">
@@ -55,7 +64,7 @@ aFORM_B:<input type="text" size="2" style="border:0px;font-family:calibri;font-s
 
 </td><td>
 <div style="border:1px solid">
-2- CONTRASTE
+<br>2- CONTRASTE
 <hr><input type="range" size="2" name="vermelhoRangeA" id="vermelhoRangeA" min="0" max="255" value="00" oninput="this.form.vermelhoInputA.value=this.value; desenha()" />R
 <input type="text" size="2" name="vermelhoInputA" id="vermelhoInputA" min="0" max="255" value="00" oninput="this.form.vermelhoRangeA.value=this.value; desenha()" />Cor vermelho
 <br><input type="range" size="2" name="verdeRangeA" id="verdeRangeA" min="0" max="255" value="00" oninput="this.form.verdeInputA.value=this.value; desenha()" />G
@@ -76,27 +85,9 @@ aFORM_B:<input type="text" size="2" style="border:0px;font-family:calibri;font-s
 <input type="text" size="2" name="NovoazulInput" min="0" max="255" value="100" oninput="this.form.NovoazulRange.value=this.value; NovaCor()" />Cor azul
 </div>
 
-<br>
-
-<div style="font-family:calibri;font-size:15px; color:black">
-O sistema funciona da seguinte forma:
-<br>1- Escolha a combinação clicando em
-<br>um dos botões Aleatorio.
-<br>2- Dê uma nota de 0 a 10 para a combinação.
-<br>3- Clique uma vez em 'GRAVA PADRÃO'.
-<br>Aparecerá a confirmação da gravacao.
-<br>Repita os passos (do 1 ao 3) 3 vezes.
-<br>Apos clique em MOSTRA PADRÃO.
-<br>4- Escolha NOVA COR deslizando os
-<br>sliders e visualize o resultado
-<br>do contraste em tempo real.
-<br>5- Alterne o metodo do contraste para
-<br>visualizar diferentes resultados.
-</div>
-
 </td><td>
 <div style="border:1px solid">
-3- NOTA (DE 0 A 10)
+<br>3- NOTA (DE 0 A 10)
 <hr><br><input type="text" size="2" name="Nota" value="5" id="Nota" min="0" max="10">
 <br><br>
 </div>
@@ -126,6 +117,8 @@ ctx.fillStyle = "rgb(100,100,137)";
 ctx.fillText ('&', 175, 100);
 ctx.fillStyle = "rgb(118,111,84)";
 ctx.fillText ('CONTRASTE', 215, 100);
+ctx.font = "40px calibri";
+ctx.fillText ('Leia as instruções abaixo', 50, 160);
 }
 function reinicia() {
 location.reload();
