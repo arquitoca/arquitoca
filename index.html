@@ -1,50 +1,65 @@
 <html>
 <form id="folha" style="font-family:calibri">
-<table cellpadding="7">
+<style>
+#fundo {
+background-color:#ddd;
+color:black
+}
+</style>
+<table cellpadding="5">
 <tfoot valign="top">
 <tr><td>
-Desenhado pela equipe ModeLAB: Júlio, Laline, Olavo
+<span style="font-family:calibri;font-size:13.5px; color:#7F8E9F">
+Desenhado pela equipe ModeLAB: Profs. Júlio, Laline, Olavo :: Direitos autorais reservados
+</span>
 <br><canvas id="Canvas" width="500" height="250" style="border:1px solid"></canvas>
-<br><br><canvas id="Canvas1" width="500" height="70" style="border:1px solid"></canvas>
+
 <br><br><input type="button" value="REGENERA" onclick="regenera();desenha()">
 <input type="button" value="REINICIA" onclick="reinicia()">
 <a href="https://docs.google.com/forms/d/1CChiFzqZh6EvEq8wVMoUiEf_NAB3TV3N-ThXAYQwjLM/viewform?edit_requested=true" target="_blank"><input type="button" value="FORMULÁRIO"></a>
+
+<canvas id="Canvas1" width="220" height="12" style="border:0px solid"></canvas>
 <br><br>
 <div style="font-family:calibri;font-size:18px; color:black">
-INSTRUÇÕES
+<strong>INSTRUÇÕES</strong>
 </div>
+<hr>
 <div style="font-family:calibri;font-size:15px; color:black">
-1- Escolha uma combinação clicando quantas vezes quiser em um dos
-<br>botões ALEATORIO ou deslizando os sliders de COR e CONTRASTE.
-<br>2- Dê uma nota de 0 a 10 para a combinação de cores.
-<br>3- Clique uma vez em 'GRAVA PADRÃO'. Aparecerá a confirmação da gravacão.
-<br>Repita os passos (do 1 ao 3) 3 vezes. Apos clique em MOSTRA PADRÃO.
-<br>4- Escolha NOVA COR deslizando os sliders e veja resultado em tempo real.
-<br>5- Alterne o metodo do contraste para visualizar diferentes resultados.
+1- Escolha uma combinação clicando quantas vezes quiser em um dos botões
+<br>ALEATORIO 1 (contrastes livres) ou ALEATORIO 2 (cores com tonalidades
+<br>similares) e/ou deslizando os sliders na caixa 1-COR e/ou 1-CONTRASTE.
+<hr>2- Dê uma NOTA de 0 a 10 para a combinação de cores na caixa 2- NOTA.
+<hr>3- Clique uma vez no botão GRAVA PADRÃO na caixa 3- TREINAMENTO.
+<br>*Aparecerá a confirmação da gravacão.
+<hr>4- Repita os passos (do 1 ao 3) por 3 vezes.
+<hr>5- Deslize os sliders na caixa 4- NOVA COR e veja resultado em tempo real.
+<hr>6- Na caixa 5- ESCOLHA DO MÉTODO alterne e visualize diferentes resultados.
 </div>
-<img id="b" src="b.png" width="2" height="2">
-<img id="a" src="a.png" width="2" height="2">
-<img id="c" src="c.png" width="2" height="2">
 </td><td>
-<input type="button" value="ALEATORIO LIVRE" onclick="GeraCorAleatoria();desenha()">
-<input type="button" value="ALEATORIO COND." onclick="GeraCorAleatoria1();desenha()">
-<div style="border:1px solid" >
-1- COR
+<br>
+<input type="button" value="ALEATORIO 1" onclick="GeraCorAleatoria();desenha()">
+<input type="button" value="ALEATORIO 2" onclick="GeraCorAleatoria1();desenha()">
+<br><br><div style="border:1px solid; padding: 3px" >
+<div id="fundo">  1- COR  </div>
 <hr>
 <input type="range" size="2" name="vermelhoRange" id="vermelhoRange" min="0" max="255" value="00" oninput="this.form.vermelhoInput.value=this.value; desenha()" />R
-<input type="text" size="2" name="vermelhoInput" id="vermelhoInput" min="0" max="255" value="00" oninput="this.form.vermelhoRange.value=this.value; desenha()" />Cor vermelho
+<input type="text" size="2" name="vermelhoInput" id="vermelhoInput" min="0" max="255" value="00" oninput="this.form.vermelhoRange.value=this.value; desenha()" />vermelho
 <br><input type="range" size="2" name="verdeRange" id="verdeRange" min="0" max="255" value="00" oninput="this.form.verdeInput.value=this.value; desenha()" />G
-<input type="text" size="2" name="verdeInput" id="verdeInput" min="0" max="255" value="00" oninput="this.form.verdeRange.value=this.value; desenha()" />Cor verde
+<input type="text" size="2" name="verdeInput" id="verdeInput" min="0" max="255" value="00" oninput="this.form.verdeRange.value=this.value; desenha()" />verde
 <br><input type="range" size="2" name="azulRange" id="azulRange" min="0" max="255" value="00" oninput="this.form.azulInput.value=this.value; desenha()" />B
-<input type="text" size="2" name="azulInput" id="azulInput" min="0" max="255" value="00" oninput="this.form.azulRange.value=this.value; desenha()" />Cor azul
+<input type="text" size="2" name="azulInput" id="azulInput" min="0" max="255" value="00" oninput="this.form.azulRange.value=this.value; desenha()" />azul
 </div>
 <br>
-<div style="border:1px solid">
-3- TREINAMENTO<div id="aviso" style="background-color:green; color:white"></div>
+<div style="border:1px solid; padding: 3px">
+<div id="fundo">3- TREINAMENTO</div><div id="aviso" style="background-color:green; color:white"></div>
 <hr><input type="button" value="GRAVA PADRÃO" onclick="gravaPadrao(); addArray(); Aviso(); Aviso1()">
-<input type="button" value="MOSTRA PADRÃO" onclick="mostraArray()">
 <div id="Result" style="font-size:10px"></div>
 <div id="ResultP1" style="font-size:10px"></div>  
+<img id="b" src="b.png" width="1" height="1">
+<img id="a" src="a.png" width="1" height="1">
+<img id="c" src="c.png" width="1" height="1">
+
+<span style="font-family:calibri;font-size:10px">
 Md Dif R:<input type="text" size="2" style="border:0px; font-family:calibri;font-size:10px" name="DifVermelho" id="DifVermelho">
 <div id="ResultRL" style="font-size:10px"></div>
 <div id="ResultRLContr" style="font-size:10px"></div> 
@@ -66,40 +81,39 @@ Md Dif B:<input type="text" size="2" style="border:0px;font-family:calibri;font-
 <div id="ResultRLContr2" style="font-size:10px"></div>
 bFORM_B:<input type="text" size="2" style="border:0px;font-family:calibri;font-size:10px" name="bFORMULA_B" id="bFORMULA_B">
 aFORM_B:<input type="text" size="2" style="border:0px;font-family:calibri;font-size:10px" name="aFORMULA_B" id="aFORMULA_B">
+</span>
 </div>
 
 </td><td>
-<br><div style="border:1px solid">
-1- CONTRASTE
+<br><br><br><div style="border:1px solid; padding: 3px">
+<div id="fundo">1- CONTRASTE</div>
 <hr><input type="range" size="2" name="vermelhoRangeA" id="vermelhoRangeA" min="0" max="255" value="00" oninput="this.form.vermelhoInputA.value=this.value; desenha()" />R
-<input type="text" size="2" name="vermelhoInputA" id="vermelhoInputA" min="0" max="255" value="00" oninput="this.form.vermelhoRangeA.value=this.value; desenha()" />Cor vermelho
+<input type="text" size="2" name="vermelhoInputA" id="vermelhoInputA" min="0" max="255" value="00" oninput="this.form.vermelhoRangeA.value=this.value; desenha()" />vermelho
 <br><input type="range" size="2" name="verdeRangeA" id="verdeRangeA" min="0" max="255" value="00" oninput="this.form.verdeInputA.value=this.value; desenha()" />G
-<input type="text" size="2" name="verdeInputA" id="verdeInputA" min="0" max="255" value="00" oninput="this.form.verdeRangeA.value=this.value; desenha()" />Cor verde
+<input type="text" size="2" name="verdeInputA" id="verdeInputA" min="0" max="255" value="00" oninput="this.form.verdeRangeA.value=this.value; desenha()" />verde
 <br><input type="range" size="2" name="azulRangeA" id="azulRangeA" min="0" max="255" value="00" oninput="this.form.azulInputA.value=this.value; desenha()" />B
-<input type="text" size="2" name="azulInputA" id="azulInputA" min="0" max="255" value="00" oninput="this.form.azulRangeA.value=this.value; desenha()" />Cor azul
+<input type="text" size="2" name="azulInputA" id="azulInputA" min="0" max="255" value="00" oninput="this.form.azulRangeA.value=this.value; desenha()" />azul
 </div>
-
 <br>
-
-<div id="MudaEstilo" style="border:1px solid red">
-4- NOVA COR
-<hr><input type="range" size="2" name="NovovermelhoRange" min="0" max="255" value="100" oninput="this.form.NovovermelhoInput.value=this.value; NovaCor()" />R
-<input type="text" size="2" name="NovovermelhoInput" min="0" max="255" value="100" oninput="this.form.NovovermelhoRange.value=this.value; NovaCor()" />Cor vermelho
-<br><input type="range" size="2" name="NovoverdeRange" min="0" max="255" value="100" oninput="this.form.NovoverdeInput.value=this.value; NovaCor()" />G
-<input type="text" size="2" name="NovoverdeInput" min="0" max="255" value="100" oninput="this.form.NovoverdeRange.value=this.value; NovaCor()" />Cor verde
-<br><input type="range" size="2" name="NovoazulRange" min="0" max="255" value="100" oninput="this.form.NovoazulInput.value=this.value; NovaCor()" />B
-<input type="text" size="2" name="NovoazulInput" min="0" max="255" value="100" oninput="this.form.NovoazulRange.value=this.value; NovaCor()" />Cor azul
+<div id="MudaEstilo" style="border:1px solid red; padding: 3px">
+<div id="fundo">4- NOVA COR</div>
+<hr><input type="range" size="2" name="NovovermelhoRange" min="0" max="255" value="100" oninput="this.form.NovovermelhoInput.value=this.value; NovaCor(); mostraArray()" />R
+<input type="text" size="2" name="NovovermelhoInput" min="0" max="255" value="100" oninput="this.form.NovovermelhoRange.value=this.value; NovaCor(); mostraArray()" />vermelho
+<br><input type="range" size="2" name="NovoverdeRange" min="0" max="255" value="100" oninput="this.form.NovoverdeInput.value=this.value; NovaCor(); mostraArray()" />G
+<input type="text" size="2" name="NovoverdeInput" min="0" max="255" value="100" oninput="this.form.NovoverdeRange.value=this.value; NovaCor(); mostraArray()" />verde
+<br><input type="range" size="2" name="NovoazulRange" min="0" max="255" value="100" oninput="this.form.NovoazulInput.value=this.value; NovaCor(); mostraArray()" />B
+<input type="text" size="2" name="NovoazulInput" min="0" max="255" value="100" oninput="this.form.NovoazulRange.value=this.value; NovaCor(); mostraArray()" />azul
 </div>
 
 </td><td>
-<br><div style="border:1px solid">
-2- NOTA (DE 0 A 10)
+<br><br><br><div style="border:1px solid; padding: 3px;">
+<div id="fundo">2- NOTA (DE 0 A 10)</div>
 <hr><br><input type="text" size="2" name="Nota" value="5" id="Nota" min="0" max="10">
-<br><br>
+<br><br><br>
 </div>
-<br><br>
-<div style="border:1px solid">
-5- ESCOLHA DO METODO
+<br>
+<div style="border:1px solid; padding: 3px">
+<div id="fundo">5- ESCOLHA DO METODO</div>
 <hr><input type="radio" name="RLMetodo" checked id="RLMetodo" onclick="NovaCor()"> METODO 1
 <br><input type="radio" name="RLMetodo" id="NaoRLMetodo" onclick="NovaCor()"> METODO 2
 
@@ -124,7 +138,7 @@ ctx.fillText ('&', 175, 100);
 ctx.fillStyle = "rgb(118,111,84)";
 ctx.fillText ('CONTRASTE', 215, 100);
 ctx.font = "40px calibri";
-ctx.fillText ('Leia as instruções abaixo', 50, 160);
+ctx.fillText ('Leia as instruções abaixo', 55, 160);
 }
 function reinicia() {
 location.reload();
@@ -236,7 +250,7 @@ ctx1.fillRect(0,0,canvas1.width,canvas.height);
 //DESENHO DO CONTRASTE
 ctx1.beginPath();
 ctx1.fillStyle = "rgb(" + vermelhoCONTR + "," + verdeCONTR + "," + azulCONTR + ")";
-ctx1.fillRect(0,(canvas1.height)/3*2,canvas1.width,canvas1.height);	
+ctx1.fillRect(0,0,(canvas1.width)/2,canvas1.height);	
 
 //texto 
 ctx.font = "25px calibri";
@@ -302,23 +316,6 @@ setTimeout(function(){ document.getElementById("aviso").innerHTML = "padrão gra
 function Aviso1() {
 document.getElementById("folha");
 setTimeout(function(){ document.getElementById("aviso").innerHTML = ""; }, 1200);
-
-//RETORNA OS VALORES AO ZERO
-/*
-folha.vermelhoInput.value = 0;
-folha.verdeInput.value = 0;
-folha.azulInput.value = 0;
-folha.vermelhoRange.value = 0;
-folha.verdeRange.value = 0;
-folha.azulRange.value = 0;
-
-folha.vermelhoInputA.value = 0;
-folha.verdeInputA.value = 0;
-folha.azulInputA.value = 0;
-folha.vermelhoRangeA.value = 0;
-folha.verdeRangeA.value = 0;
-folha.azulRangeA.value = 0;
-*/
 }
 
 //----------------------------------------------------
@@ -583,7 +580,7 @@ ctx1.fillRect(0,0,canvas1.width,canvas1.height);
 //DESENHO DO CONTRASTE
 ctx1.beginPath();
 ctx1.fillStyle = "rgb(" + NovovermelhoCONTR + "," + NovoverdeCONTR + "," + NovoazulCONTR + ")";
-ctx1.fillRect(0,(canvas1.height)/3*2,canvas1.width,canvas1.height);
+ctx1.fillRect(0,0,(canvas1.width)/2,canvas1.height);
 
 //-----------------------------------------------------------------------
 
@@ -621,9 +618,7 @@ ctx.font = "25px calibri";
 ctx.fillStyle = "gray";
 //ctx.fillText ('cor', 460, 30);
 //ctx.fillText ('contraste', 400, 400);
-
 }
-
 </script>
 </form>
 </html>
