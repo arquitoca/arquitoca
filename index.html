@@ -14,7 +14,7 @@ Desenhado pela equipe ModeLAB: Profs. Júlio, Laline, Olavo :: Direitos autorais
 </span>
 <br><canvas id="Canvas" width="500" height="250" style="border:1px solid"></canvas>
 
-<br><br><input type="button" value="REGENERA" onclick="regenera();desenha()">
+<br><input type="button" value="REGENERA" onclick="regenera();desenha()">
 <input type="button" value="REINICIA" onclick="reinicia()">
 <a href="https://docs.google.com/forms/d/1CChiFzqZh6EvEq8wVMoUiEf_NAB3TV3N-ThXAYQwjLM/viewform?edit_requested=true" target="_blank"><input type="button" value="FORMULÁRIO"></a>
 
@@ -24,21 +24,24 @@ Desenhado pela equipe ModeLAB: Profs. Júlio, Laline, Olavo :: Direitos autorais
 <strong>INSTRUÇÕES</strong>
 </div>
 <hr>
-<div style="font-family:calibri;font-size:15px; color:black">
+<span style="font-family:calibri;font-size:15px; color:black">
 1- Escolha uma combinação clicando quantas vezes quiser em um dos botões
 <br>ALEATORIO 1 (contrastes livres) ou ALEATORIO 2 (cores com tonalidades
 <br>similares) e/ou deslizando os sliders na caixa 1-COR e/ou 1-CONTRASTE.
+<br>*Marque Inverte se voce quiser que a parede do fundo seja a mais clara.
+<br>**Faça toda a simulação com Inverte marcado ou toda com Inverte desmarcado.
 <hr>2- Dê uma NOTA de 0 a 10 para a combinação de cores na caixa 2- NOTA.
 <hr>3- Clique uma vez no botão GRAVA PADRÃO na caixa 3- TREINAMENTO.
 <br>*Aparecerá a confirmação da gravacão.
 <hr>4- Repita os passos (do 1 ao 3) por 3 vezes.
-<hr>5- Deslize os sliders na caixa 4- NOVA COR e veja resultado em tempo real.
+<hr>5- Deslize os sliders na caixa 4- NOVA COR ou clique nas caixas de cores
 <hr>6- Na caixa 5- ESCOLHA DO MÉTODO alterne e visualize diferentes resultados.
-</div>
+</span>
 </td><td>
 <br>
 <input type="button" value="ALEATORIO 1" onclick="GeraCorAleatoria();desenha()">
 <input type="button" value="ALEATORIO 2" onclick="GeraCorAleatoria1();desenha()">
+<input type="checkbox" id="inverte">Inverte
 <br><br><div style="border:1px solid; padding: 3px" >
 <div id="fundo">  1- COR  </div>
 <hr>
@@ -104,6 +107,24 @@ aFORM_B:<input type="text" size="2" style="border:0px;font-family:calibri;font-s
 <br><input type="range" size="2" name="NovoazulRange" min="0" max="255" value="100" oninput="this.form.NovoazulInput.value=this.value; NovaCor(); mostraArray()" />B
 <input type="text" size="2" name="NovoazulInput" min="0" max="255" value="100" oninput="this.form.NovoazulRange.value=this.value; NovaCor(); mostraArray()" />azul
 </div>
+<br>
+
+<table cellpadding="4">
+<tr><td>
+<canvas id="Canvas5" width="40" height="30" style="border:0px solid" onclick="NovaCorA(); mostraArray()"></canvas>
+</td><td>
+<canvas id="Canvas6" width="40" height="30" style="border:0px solid" onclick="NovaCorB(); mostraArray()"></canvas>
+</td><td>
+<canvas id="Canvas7" width="40" height="30" style="border:0px solid" onclick="NovaCorC(); mostraArray()"></canvas>
+</td><td>
+<canvas id="Canvas8" width="40" height="30" style="border:0px solid" onclick="NovaCorD(); mostraArray()"></canvas>
+</td><td>
+<canvas id="Canvas9" width="40" height="30" style="border:0px solid" onclick="NovaCorE(); mostraArray()"></canvas>
+</td><td>
+
+
+</td></tr>
+</table>
 
 </td><td>
 <br><br><br><div style="border:1px solid; padding: 3px;">
@@ -128,7 +149,33 @@ aFORM_B:<input type="text" size="2" style="border:0px;font-family:calibri;font-s
 window.onload = function() {
 document.getElementById("folha");
 var canvas = document.getElementById("Canvas");
+var canvas5 = document.getElementById("Canvas5");
+var canvas6 = document.getElementById("Canvas6");
+var canvas7 = document.getElementById("Canvas7");
+var canvas8 = document.getElementById("Canvas8");
+var canvas9 = document.getElementById("Canvas9");
 var ctx = canvas.getContext("2d");
+var ctx5 = canvas5.getContext("2d");
+var ctx6 = canvas6.getContext("2d");
+var ctx7 = canvas7.getContext("2d");
+var ctx8 = canvas8.getContext("2d");
+var ctx9 = canvas9.getContext("2d");
+
+ctx5.fillStyle = "rgb(144,133,106)";
+ctx5.fillRect(0,0,canvas5.width,canvas5.height);
+
+ctx6.fillStyle = "rgb(122,156,106)";
+ctx6.fillRect(0,0,canvas6.width,canvas6.height);
+
+ctx7.fillStyle = "rgb(174,131,106)";
+ctx7.fillRect(0,0,canvas7.width,canvas7.height);
+
+ctx8.fillStyle = "rgb(65,93,106)";
+ctx8.fillRect(0,0,canvas8.width,canvas8.height);
+
+ctx9.fillStyle = "rgb(111,131,156)";
+ctx9.fillRect(0,0,canvas9.width,canvas9.height);
+
 ctx.font = "70px calibri";
 ctx.fillStyle = "rgb(152,145,111)";
 ctx.fillText ('COR', 50, 100);
@@ -211,18 +258,37 @@ var azulCOR = Math.random()*255;
 folha.azulInput.value = azulCOR.toFixed(0);
 folha.azulRange.value = azulCOR.toFixed(0);
 
+var inverte = document.getElementById("inverte").checked;
 
-var vermelhoCONTR = (1*vermelhoCOR) - (1*Math.random()*100);
-folha.vermelhoInputA.value = vermelhoCONTR.toFixed(0);
-folha.vermelhoRangeA.value = vermelhoCONTR.toFixed(0);
+if (inverte == false)
+    {
+	var vermelhoCONTR = (1*vermelhoCOR) - (1*Math.random()*100);
+	folha.vermelhoInputA.value = vermelhoCONTR.toFixed(0);
+	folha.vermelhoRangeA.value = vermelhoCONTR.toFixed(0);
 
-var vedeCONTR = (1*verdeCOR) - (1*Math.random()*100);
-folha.verdeInputA.value = vedeCONTR.toFixed(0);
-folha.verdeRangeA.value = vedeCONTR.toFixed(0);
+	var vedeCONTR = (1*verdeCOR) - (1*Math.random()*100);
+	folha.verdeInputA.value = vedeCONTR.toFixed(0);
+	folha.verdeRangeA.value = vedeCONTR.toFixed(0);
 
-var azulCONTR = (1*azulCOR) - (1*Math.random()*100);
-folha.azulInputA.value = azulCONTR.toFixed(0);
-folha.azulRangeA.value = azulCONTR.toFixed(0);
+	var azulCONTR = (1*azulCOR) - (1*Math.random()*100);
+	folha.azulInputA.value = azulCONTR.toFixed(0);
+	folha.azulRangeA.value = azulCONTR.toFixed(0);
+    }
+else
+	{
+	var vermelhoCONTR = (1*vermelhoCOR) + (1*Math.random()*100);
+	folha.vermelhoInputA.value = vermelhoCONTR.toFixed(0);
+	folha.vermelhoRangeA.value = vermelhoCONTR.toFixed(0);
+
+	var vedeCONTR = (1*verdeCOR) + (1*Math.random()*100);
+	folha.verdeInputA.value = vedeCONTR.toFixed(0);
+	folha.verdeRangeA.value = vedeCONTR.toFixed(0);
+
+	var azulCONTR = (1*azulCOR) + (1*Math.random()*100);
+	folha.azulInputA.value = azulCONTR.toFixed(0);
+	folha.azulRangeA.value = azulCONTR.toFixed(0);
+	}
+
 }
 
 function desenha() {
@@ -551,6 +617,414 @@ var ctx1 = canvas1.getContext("2d");
 var NovovermelhoCOR = folha.NovovermelhoInput.value;
 var NovoverdeCOR = folha.NovoverdeInput.value;
 var NovoazulCOR = folha.NovoazulInput.value;
+
+var RLMetodo = document.getElementById("RLMetodo").checked;
+	if (RLMetodo == true){
+		var NovovermelhoCONTR = 1*(folha.aFORMULA_R.value) + ((folha.bFORMULA_R.value) * NovovermelhoCOR);
+		var NovoverdeCONTR = 1*(folha.aFORMULA_G.value) + ((folha.bFORMULA_G.value) * NovoverdeCOR);
+		var NovoazulCONTR = 1*(folha.aFORMULA_B.value) + ((folha.bFORMULA_B.value) * NovoazulCOR);
+	} else {
+
+var ContrEscuro = document.getElementById("ContrEscuro").checked;
+	if (ContrEscuro == true){
+		var NovovermelhoCONTR = folha.DifVermelho.value * NovovermelhoCOR;
+		var NovoverdeCONTR = folha.DifVerde.value * NovoverdeCOR;
+		var NovoazulCONTR = folha.DifAzul.value * NovoazulCOR;
+	} else {
+		var NovovermelhoCONTR = NovovermelhoCOR / folha.DifVermelho.value;
+		var NovoverdeCONTR = NovoverdeCOR / folha.DifVerde.value;
+		var NovoazulCONTR = NovoazulCOR / folha.DifAzul.value;
+	}
+	}
+	
+//==============================================================================================
+//-----------------------------------------------------------------------	
+//DESENHO DA COR
+ctx1.beginPath();
+ctx1.fillStyle = "rgb(" + NovovermelhoCOR + "," + NovoverdeCOR + "," + NovoazulCOR + ")";
+ctx1.fillRect(0,0,canvas1.width,canvas1.height);	
+
+//DESENHO DO CONTRASTE
+ctx1.beginPath();
+ctx1.fillStyle = "rgb(" + NovovermelhoCONTR + "," + NovoverdeCONTR + "," + NovoazulCONTR + ")";
+ctx1.fillRect(0,0,(canvas1.width)/2,canvas1.height);
+
+//-----------------------------------------------------------------------
+
+
+var img = document.getElementById("b");
+ctx.drawImage(img,0,0, 500, 250);
+
+ctx.beginPath();
+ctx.moveTo(7,7);
+ctx.lineTo(33,7);
+ctx.lineTo(103,46);
+ctx.lineTo(103,206);
+ctx.lineTo(7,245);
+ctx.lineTo(7,7);
+ctx.fillStyle = "rgb(" + NovovermelhoCOR + "," + NovoverdeCOR + "," + NovoazulCOR + ")";
+ctx.fill();
+
+ctx.fillStyle = "rgb(" + NovovermelhoCONTR + "," + NovoverdeCONTR + "," + NovoazulCONTR + ")";
+ctx.fillRect(103,70,330,131);
+
+var img2 = document.getElementById("c");
+ctx.drawImage(img2,0,0, 500, 250);
+
+var img1 = document.getElementById("a");
+ctx.drawImage(img1,0,0, 500, 250);
+
+//texto informando RGB no contraste novo
+ctx.font = "15px calibri";
+ctx.fillStyle = "black";
+//ctx.fillText ('R: ' + NovovermelhoCONTR, canvas.width - 60, canvas.height - 50);
+//ctx.fillText ('G: ' + NovoverdeCONTR, canvas.width - 60, canvas.height - 30);
+//ctx.fillText ('B: ' + NovoazulCONTR, canvas.width - 60, canvas.height - 10);
+
+ctx.font = "25px calibri";
+ctx.fillStyle = "gray";
+//ctx.fillText ('cor', 460, 30);
+//ctx.fillText ('contraste', 400, 400);
+}
+//==============================================================================================
+
+function NovaCorA() {
+document.getElementById("folha");
+var canvas = document.getElementById("Canvas");
+var canvas1 = document.getElementById("Canvas1");
+var canvas5 = document.getElementById("Canvas5");
+var ctx = canvas.getContext("2d");
+var ctx1 = canvas1.getContext("2d");
+var ctx5 = canvas5.getContext("2d");
+
+var NovovermelhoCOR = 144;
+var NovoverdeCOR = 133;
+var NovoazulCOR = 106;
+
+var RLMetodo = document.getElementById("RLMetodo").checked;
+	if (RLMetodo == true){
+		var NovovermelhoCONTR = 1*(folha.aFORMULA_R.value) + ((folha.bFORMULA_R.value) * NovovermelhoCOR);
+		var NovoverdeCONTR = 1*(folha.aFORMULA_G.value) + ((folha.bFORMULA_G.value) * NovoverdeCOR);
+		var NovoazulCONTR = 1*(folha.aFORMULA_B.value) + ((folha.bFORMULA_B.value) * NovoazulCOR);
+	} else {
+
+var ContrEscuro = document.getElementById("ContrEscuro").checked;
+	if (ContrEscuro == true){
+		var NovovermelhoCONTR = folha.DifVermelho.value * NovovermelhoCOR;
+		var NovoverdeCONTR = folha.DifVerde.value * NovoverdeCOR;
+		var NovoazulCONTR = folha.DifAzul.value * NovoazulCOR;
+	} else {
+		var NovovermelhoCONTR = NovovermelhoCOR / folha.DifVermelho.value;
+		var NovoverdeCONTR = NovoverdeCOR / folha.DifVerde.value;
+		var NovoazulCONTR = NovoazulCOR / folha.DifAzul.value;
+	}
+	}
+
+//-----------------------------------------------------------------------	
+//DESENHO DA COR
+ctx1.beginPath();
+ctx1.fillStyle = "rgb(" + NovovermelhoCOR + "," + NovoverdeCOR + "," + NovoazulCOR + ")";
+ctx1.fillRect(0,0,canvas1.width,canvas1.height);	
+
+//DESENHO DO CONTRASTE
+ctx1.beginPath();
+ctx1.fillStyle = "rgb(" + NovovermelhoCONTR + "," + NovoverdeCONTR + "," + NovoazulCONTR + ")";
+ctx1.fillRect(0,0,(canvas1.width)/2,canvas1.height);
+
+//-----------------------------------------------------------------------
+
+
+var img = document.getElementById("b");
+ctx.drawImage(img,0,0, 500, 250);
+
+ctx.beginPath();
+ctx.moveTo(7,7);
+ctx.lineTo(33,7);
+ctx.lineTo(103,46);
+ctx.lineTo(103,206);
+ctx.lineTo(7,245);
+ctx.lineTo(7,7);
+ctx.fillStyle = "rgb(" + NovovermelhoCOR + "," + NovoverdeCOR + "," + NovoazulCOR + ")";
+ctx.fill();
+
+ctx.fillStyle = "rgb(" + NovovermelhoCONTR + "," + NovoverdeCONTR + "," + NovoazulCONTR + ")";
+ctx.fillRect(103,70,330,131);
+
+var img2 = document.getElementById("c");
+ctx.drawImage(img2,0,0, 500, 250);
+
+var img1 = document.getElementById("a");
+ctx.drawImage(img1,0,0, 500, 250);
+
+//texto informando RGB no contraste novo
+ctx.font = "15px calibri";
+ctx.fillStyle = "black";
+//ctx.fillText ('R: ' + NovovermelhoCONTR, canvas.width - 60, canvas.height - 50);
+//ctx.fillText ('G: ' + NovoverdeCONTR, canvas.width - 60, canvas.height - 30);
+//ctx.fillText ('B: ' + NovoazulCONTR, canvas.width - 60, canvas.height - 10);
+
+ctx.font = "25px calibri";
+ctx.fillStyle = "gray";
+//ctx.fillText ('cor', 460, 30);
+//ctx.fillText ('contraste', 400, 400);
+}
+
+//=========================================================================================
+function NovaCorB() {
+document.getElementById("folha");
+var canvas = document.getElementById("Canvas");
+var canvas1 = document.getElementById("Canvas1");
+var canvas6 = document.getElementById("Canvas6");
+var ctx = canvas.getContext("2d");
+var ctx1 = canvas1.getContext("2d");
+var ctx6 = canvas6.getContext("2d");
+
+var NovovermelhoCOR = 122;
+var NovoverdeCOR = 156;
+var NovoazulCOR = 106;
+
+var RLMetodo = document.getElementById("RLMetodo").checked;
+	if (RLMetodo == true){
+		var NovovermelhoCONTR = 1*(folha.aFORMULA_R.value) + ((folha.bFORMULA_R.value) * NovovermelhoCOR);
+		var NovoverdeCONTR = 1*(folha.aFORMULA_G.value) + ((folha.bFORMULA_G.value) * NovoverdeCOR);
+		var NovoazulCONTR = 1*(folha.aFORMULA_B.value) + ((folha.bFORMULA_B.value) * NovoazulCOR);
+	} else {
+
+var ContrEscuro = document.getElementById("ContrEscuro").checked;
+	if (ContrEscuro == true){
+		var NovovermelhoCONTR = folha.DifVermelho.value * NovovermelhoCOR;
+		var NovoverdeCONTR = folha.DifVerde.value * NovoverdeCOR;
+		var NovoazulCONTR = folha.DifAzul.value * NovoazulCOR;
+	} else {
+		var NovovermelhoCONTR = NovovermelhoCOR / folha.DifVermelho.value;
+		var NovoverdeCONTR = NovoverdeCOR / folha.DifVerde.value;
+		var NovoazulCONTR = NovoazulCOR / folha.DifAzul.value;
+	}
+	}
+
+//-----------------------------------------------------------------------	
+//DESENHO DA COR
+ctx1.beginPath();
+ctx1.fillStyle = "rgb(" + NovovermelhoCOR + "," + NovoverdeCOR + "," + NovoazulCOR + ")";
+ctx1.fillRect(0,0,canvas1.width,canvas1.height);	
+
+//DESENHO DO CONTRASTE
+ctx1.beginPath();
+ctx1.fillStyle = "rgb(" + NovovermelhoCONTR + "," + NovoverdeCONTR + "," + NovoazulCONTR + ")";
+ctx1.fillRect(0,0,(canvas1.width)/2,canvas1.height);
+
+//-----------------------------------------------------------------------
+
+
+var img = document.getElementById("b");
+ctx.drawImage(img,0,0, 500, 250);
+
+ctx.beginPath();
+ctx.moveTo(7,7);
+ctx.lineTo(33,7);
+ctx.lineTo(103,46);
+ctx.lineTo(103,206);
+ctx.lineTo(7,245);
+ctx.lineTo(7,7);
+ctx.fillStyle = "rgb(" + NovovermelhoCOR + "," + NovoverdeCOR + "," + NovoazulCOR + ")";
+ctx.fill();
+
+ctx.fillStyle = "rgb(" + NovovermelhoCONTR + "," + NovoverdeCONTR + "," + NovoazulCONTR + ")";
+ctx.fillRect(103,70,330,131);
+
+var img2 = document.getElementById("c");
+ctx.drawImage(img2,0,0, 500, 250);
+
+var img1 = document.getElementById("a");
+ctx.drawImage(img1,0,0, 500, 250);
+
+//texto informando RGB no contraste novo
+ctx.font = "15px calibri";
+ctx.fillStyle = "black";
+//ctx.fillText ('R: ' + NovovermelhoCONTR, canvas.width - 60, canvas.height - 50);
+//ctx.fillText ('G: ' + NovoverdeCONTR, canvas.width - 60, canvas.height - 30);
+//ctx.fillText ('B: ' + NovoazulCONTR, canvas.width - 60, canvas.height - 10);
+
+ctx.font = "25px calibri";
+ctx.fillStyle = "gray";
+//ctx.fillText ('cor', 460, 30);
+//ctx.fillText ('contraste', 400, 400);
+}
+//=========================================================================================
+function NovaCorC() {
+document.getElementById("folha");
+var canvas = document.getElementById("Canvas");
+var canvas1 = document.getElementById("Canvas1");
+var canvas7 = document.getElementById("Canvas7");
+var ctx = canvas.getContext("2d");
+var ctx1 = canvas1.getContext("2d");
+var ctx7 = canvas7.getContext("2d");
+
+var NovovermelhoCOR = 174;
+var NovoverdeCOR = 131;
+var NovoazulCOR = 106;
+
+var RLMetodo = document.getElementById("RLMetodo").checked;
+	if (RLMetodo == true){
+		var NovovermelhoCONTR = 1*(folha.aFORMULA_R.value) + ((folha.bFORMULA_R.value) * NovovermelhoCOR);
+		var NovoverdeCONTR = 1*(folha.aFORMULA_G.value) + ((folha.bFORMULA_G.value) * NovoverdeCOR);
+		var NovoazulCONTR = 1*(folha.aFORMULA_B.value) + ((folha.bFORMULA_B.value) * NovoazulCOR);
+	} else {
+
+var ContrEscuro = document.getElementById("ContrEscuro").checked;
+	if (ContrEscuro == true){
+		var NovovermelhoCONTR = folha.DifVermelho.value * NovovermelhoCOR;
+		var NovoverdeCONTR = folha.DifVerde.value * NovoverdeCOR;
+		var NovoazulCONTR = folha.DifAzul.value * NovoazulCOR;
+	} else {
+		var NovovermelhoCONTR = NovovermelhoCOR / folha.DifVermelho.value;
+		var NovoverdeCONTR = NovoverdeCOR / folha.DifVerde.value;
+		var NovoazulCONTR = NovoazulCOR / folha.DifAzul.value;
+	}
+	}
+
+//-----------------------------------------------------------------------	
+//DESENHO DA COR
+ctx1.beginPath();
+ctx1.fillStyle = "rgb(" + NovovermelhoCOR + "," + NovoverdeCOR + "," + NovoazulCOR + ")";
+ctx1.fillRect(0,0,canvas1.width,canvas1.height);	
+
+//DESENHO DO CONTRASTE
+ctx1.beginPath();
+ctx1.fillStyle = "rgb(" + NovovermelhoCONTR + "," + NovoverdeCONTR + "," + NovoazulCONTR + ")";
+ctx1.fillRect(0,0,(canvas1.width)/2,canvas1.height);
+
+//-----------------------------------------------------------------------
+
+
+var img = document.getElementById("b");
+ctx.drawImage(img,0,0, 500, 250);
+
+ctx.beginPath();
+ctx.moveTo(7,7);
+ctx.lineTo(33,7);
+ctx.lineTo(103,46);
+ctx.lineTo(103,206);
+ctx.lineTo(7,245);
+ctx.lineTo(7,7);
+ctx.fillStyle = "rgb(" + NovovermelhoCOR + "," + NovoverdeCOR + "," + NovoazulCOR + ")";
+ctx.fill();
+
+ctx.fillStyle = "rgb(" + NovovermelhoCONTR + "," + NovoverdeCONTR + "," + NovoazulCONTR + ")";
+ctx.fillRect(103,70,330,131);
+
+var img2 = document.getElementById("c");
+ctx.drawImage(img2,0,0, 500, 250);
+
+var img1 = document.getElementById("a");
+ctx.drawImage(img1,0,0, 500, 250);
+
+//texto informando RGB no contraste novo
+ctx.font = "15px calibri";
+ctx.fillStyle = "black";
+//ctx.fillText ('R: ' + NovovermelhoCONTR, canvas.width - 60, canvas.height - 50);
+//ctx.fillText ('G: ' + NovoverdeCONTR, canvas.width - 60, canvas.height - 30);
+//ctx.fillText ('B: ' + NovoazulCONTR, canvas.width - 60, canvas.height - 10);
+
+ctx.font = "25px calibri";
+ctx.fillStyle = "gray";
+//ctx.fillText ('cor', 460, 30);
+//ctx.fillText ('contraste', 400, 400);
+}
+//=========================================================================================
+function NovaCorD() {
+document.getElementById("folha");
+var canvas = document.getElementById("Canvas");
+var canvas1 = document.getElementById("Canvas1");
+var canvas8 = document.getElementById("Canvas8");
+var ctx = canvas.getContext("2d");
+var ctx1 = canvas1.getContext("2d");
+var ctx8 = canvas8.getContext("2d");
+
+var NovovermelhoCOR = 65;
+var NovoverdeCOR = 93;
+var NovoazulCOR = 106;
+
+var RLMetodo = document.getElementById("RLMetodo").checked;
+	if (RLMetodo == true){
+		var NovovermelhoCONTR = 1*(folha.aFORMULA_R.value) + ((folha.bFORMULA_R.value) * NovovermelhoCOR);
+		var NovoverdeCONTR = 1*(folha.aFORMULA_G.value) + ((folha.bFORMULA_G.value) * NovoverdeCOR);
+		var NovoazulCONTR = 1*(folha.aFORMULA_B.value) + ((folha.bFORMULA_B.value) * NovoazulCOR);
+	} else {
+
+var ContrEscuro = document.getElementById("ContrEscuro").checked;
+	if (ContrEscuro == true){
+		var NovovermelhoCONTR = folha.DifVermelho.value * NovovermelhoCOR;
+		var NovoverdeCONTR = folha.DifVerde.value * NovoverdeCOR;
+		var NovoazulCONTR = folha.DifAzul.value * NovoazulCOR;
+	} else {
+		var NovovermelhoCONTR = NovovermelhoCOR / folha.DifVermelho.value;
+		var NovoverdeCONTR = NovoverdeCOR / folha.DifVerde.value;
+		var NovoazulCONTR = NovoazulCOR / folha.DifAzul.value;
+	}
+	}
+
+//-----------------------------------------------------------------------	
+//DESENHO DA COR
+ctx1.beginPath();
+ctx1.fillStyle = "rgb(" + NovovermelhoCOR + "," + NovoverdeCOR + "," + NovoazulCOR + ")";
+ctx1.fillRect(0,0,canvas1.width,canvas1.height);	
+
+//DESENHO DO CONTRASTE
+ctx1.beginPath();
+ctx1.fillStyle = "rgb(" + NovovermelhoCONTR + "," + NovoverdeCONTR + "," + NovoazulCONTR + ")";
+ctx1.fillRect(0,0,(canvas1.width)/2,canvas1.height);
+
+//-----------------------------------------------------------------------
+
+
+var img = document.getElementById("b");
+ctx.drawImage(img,0,0, 500, 250);
+
+ctx.beginPath();
+ctx.moveTo(7,7);
+ctx.lineTo(33,7);
+ctx.lineTo(103,46);
+ctx.lineTo(103,206);
+ctx.lineTo(7,245);
+ctx.lineTo(7,7);
+ctx.fillStyle = "rgb(" + NovovermelhoCOR + "," + NovoverdeCOR + "," + NovoazulCOR + ")";
+ctx.fill();
+
+ctx.fillStyle = "rgb(" + NovovermelhoCONTR + "," + NovoverdeCONTR + "," + NovoazulCONTR + ")";
+ctx.fillRect(103,70,330,131);
+
+var img2 = document.getElementById("c");
+ctx.drawImage(img2,0,0, 500, 250);
+
+var img1 = document.getElementById("a");
+ctx.drawImage(img1,0,0, 500, 250);
+
+//texto informando RGB no contraste novo
+ctx.font = "15px calibri";
+ctx.fillStyle = "black";
+//ctx.fillText ('R: ' + NovovermelhoCONTR, canvas.width - 60, canvas.height - 50);
+//ctx.fillText ('G: ' + NovoverdeCONTR, canvas.width - 60, canvas.height - 30);
+//ctx.fillText ('B: ' + NovoazulCONTR, canvas.width - 60, canvas.height - 10);
+
+ctx.font = "25px calibri";
+ctx.fillStyle = "gray";
+//ctx.fillText ('cor', 460, 30);
+//ctx.fillText ('contraste', 400, 400);
+}
+//=========================================================================================
+function NovaCorE() {
+document.getElementById("folha");
+var canvas = document.getElementById("Canvas");
+var canvas1 = document.getElementById("Canvas1");
+var canvas9 = document.getElementById("Canvas9");
+var ctx = canvas.getContext("2d");
+var ctx1 = canvas1.getContext("2d");
+var ctx9 = canvas9.getContext("2d");
+
+var NovovermelhoCOR = 111;
+var NovoverdeCOR = 131;
+var NovoazulCOR = 156;
 
 var RLMetodo = document.getElementById("RLMetodo").checked;
 	if (RLMetodo == true){
