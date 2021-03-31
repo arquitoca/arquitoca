@@ -11,25 +11,10 @@ var NovovermelhoCOR = 65;
 var NovoverdeCOR = 93;
 var NovoazulCOR = 106;
 
-var RLMetodo = document.getElementById("RLMetodo").checked;
-	if (RLMetodo == true){
-		var NovovermelhoCONTR = 1*(folha.aFORMULA_R.value) + ((folha.bFORMULA_R.value) * NovovermelhoCOR);
-		var NovoverdeCONTR = 1*(folha.aFORMULA_G.value) + ((folha.bFORMULA_G.value) * NovoverdeCOR);
-		var NovoazulCONTR = 1*(folha.aFORMULA_B.value) + ((folha.bFORMULA_B.value) * NovoazulCOR);
-	} else {
-
-var ContrEscuro = document.getElementById("ContrEscuro").checked;
-	if (ContrEscuro == true){
-		var NovovermelhoCONTR = folha.DifVermelho.value * NovovermelhoCOR;
-		var NovoverdeCONTR = folha.DifVerde.value * NovoverdeCOR;
-		var NovoazulCONTR = folha.DifAzul.value * NovoazulCOR;
-	} else {
-		var NovovermelhoCONTR = NovovermelhoCOR / folha.DifVermelho.value;
-		var NovoverdeCONTR = NovoverdeCOR / folha.DifVerde.value;
-		var NovoazulCONTR = NovoazulCOR / folha.DifAzul.value;
-	}
-	}
-
+var NovovermelhoCONTR = 1*(folha.aFORMULA_R.value) + ((folha.bFORMULA_R.value) * NovovermelhoCOR);
+var NovoverdeCONTR = 1*(folha.aFORMULA_G.value) + ((folha.bFORMULA_G.value) * NovoverdeCOR);
+var NovoazulCONTR = 1*(folha.aFORMULA_B.value) + ((folha.bFORMULA_B.value) * NovoazulCOR);
+	
 //-----------------------------------------------------------------------	
 //DESENHO DA COR
 ctx1.beginPath();
